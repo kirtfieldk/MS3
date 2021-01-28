@@ -1,3 +1,11 @@
+/*
+    Keith Kirtfield
+    MS3 Code
+    DataMonster is responsible for reading in the data and passing the Data into either
+    the SQLite database or the FileWriterMonster Object
+
+    No implementation of the Scanner object; instead, I used the commons CSV
+ */
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -65,6 +73,8 @@ public class DataMonster {
             System.out.println(e.getMessage());
         }
     }
+    //This method is in charge of inserting values > Iterate through the csv file
+    //and push the CSVRecord object to the setStm method
     public void insertValues(){
         try {
             //Create a brand new statment for each iteration
@@ -104,6 +114,7 @@ public class DataMonster {
                 record.get("G").length() == 0 || record.get("H").length() == 0 || record.get("I").length() == 0 ||
                 record.get("J").length() == 0;
     }
+    //Set the prepared statment with values and returns no value
     public static void setStm(CSVRecord record, PreparedStatement pstmt) throws SQLException{
         pstmt.setString(1, record.get("A").trim());
         pstmt.setString(2, record.get("B").trim());

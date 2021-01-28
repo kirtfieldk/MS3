@@ -1,3 +1,12 @@
+/*
+    Keith Kirtfield
+    MS3 Code
+    FileWriterMonster is responsible for writting stats into
+    a .log file and .csv file. These new files are placed into
+    the current Directory.
+
+    Use of FileWriter and Common CSV
+ */
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
@@ -26,6 +35,7 @@ public class FileWriterMonster {
         }
 
     }
+    //Standard method to write three lines > Records, failed, success
     public static void writeStats(int fail, int success, String file){
         try {
             int sum = success + fail;
