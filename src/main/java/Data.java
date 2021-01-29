@@ -8,8 +8,6 @@ public class Data {
             Class.forName("org.sqlite.JDBC");
                 if (args.length == 2) {
                     DataMonster dataMonster = new DataMonster(args[0], args[1]);
-                    System.out.println(args[0]);
-                    System.out.println(args[1]);
                     dataMonster.makeTable();
                     dataMonster.insertValues();
                 }else{

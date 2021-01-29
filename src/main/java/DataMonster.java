@@ -9,8 +9,6 @@
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -40,7 +38,7 @@ public class DataMonster {
 
     }
     public void getConnectionAndMakeDb(){
-        String url = "jdbc:sqlite:"+System.getProperty("user.dir") + "/" + this.fileName;
+        String url = "jdbc:sqlite:"+ this.fileName;
         //Create Database
         try {
             this.conn = DriverManager.getConnection(url);
@@ -76,29 +74,35 @@ public class DataMonster {
     //This method is in charge of inserting values > Iterate through the csv file
     //and push the CSVRecord object to the setStm method
     public void insertValues(){
+        int i = 0;
         try {
-            //Create a brand new statment for each iteration
+            //Create a brand new statement for each iteration
             String stm = "INSERT INTO csvValues(A,B,C,D,E,F,G,H,I,J) values (?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement pstmt = this.conn.prepareStatement(stm);
             Reader reader = new FileReader(this.csvFile);
-            CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());
+            CSVParser csvParser = new CSVParser(reader, CSVFormat
+                                                                .DEFAULT
+                                                                .withFirstRecordAsHeader()
+                                                                .withIgnoreHeaderCase()
+                                                                .withAllowMissingColumnNames()
+                                                                .withTrim());
+            //With how the CVSformat is set up, the first row will always enter the
+            //errorRecords array.
             for(CSVRecord record : csvParser) {
-//                Check For Null or empty values > Increase fail count and end function
-                if(DataMonster.checkIfAnyEmpty(record)){
+            //Check For Null or empty values > Increase fail count and end function
+            //We use this i counter to pass the first row
+                if(DataMonster.checkIfAnyEmpty(record) && i != 0){
                     this.fail+=1;
                     this.errorRecords.add(record);
                 }else {
-                    DataMonster.setStm(record, pstmt);
                     //After we establish that there are no blank values, we execute the stmt and increment success
+                    DataMonster.setStm(record, pstmt);
                     this.success += 1;
                     pstmt.executeUpdate();
+                    i++;
                 }
             }
-        }catch(SQLException e) {
-            this.fail += 1;
-        }catch (FileNotFoundException e){
-            System.out.println(e.getMessage());
-        }catch(IOException e){
+        }catch(SQLException | IOException | IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
         //At the vary end of this function -> Create records
