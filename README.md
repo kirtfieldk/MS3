@@ -7,6 +7,16 @@ this program will be `<input-file>-bad.csv` and `<input-file>.log`.
 
 ## How to Run:
 
+We need to construct a `.jar` file-- run:
+```
+mvn -f pom.xml clean package install
+```
+This places the `sqLite-MS3.jar` in the `./target` directory, and places the 
+dependency jars in the `./target/libs` folder. To Execute run:
+```
+java -cp ./target/sqLite-MS3.jar Data <.bd_file> <.csv_file>
+```
+
 This is a `Maven` project that relies on the `sqlite-jdbc` and
 `commons-csv` libraries. 
 

@@ -48,21 +48,20 @@ public class DataMonster {
         }
     }
     public void makeTable(){
-        String table = """
-                CREATE TABLE IF NOT EXISTS csvValues (
-                    id Integer PRIMARY KEY,
-                    A varchar(100),
-                    B varchar(100),
-                    C varchar(100),
-                    D varchar(50),
-                    E blob,
-                    f varchar(100),
-                    G varchar(50),
-                    H varchar(50),
-                    I varchar(50),
-                    J blob
-                );               
-                """;
+        String table = "CREATE TABLE IF NOT EXISTS csvValues ("+
+                    "id Integer PRIMARY KEY, "+
+                    "A varchar(100), "+
+                    "B varchar(100), " +
+                    "C varchar(100), " +
+                    "D varchar(50), " +
+                    "E blob, " +
+                    "f varchar(100), " +
+                    "G varchar(50), " +
+                    "H varchar(50), " +
+                    "I varchar(50), " +
+                    "J blob"+
+                ");";
+
         try {
             Statement stmt = this.conn.createStatement();
             // create a new table
