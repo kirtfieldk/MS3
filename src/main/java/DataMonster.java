@@ -38,7 +38,7 @@ public class DataMonster {
 
     }
     public void getConnectionAndMakeDb(){
-        String url = "jdbc:sqlite:"+ this.fileName;
+        String url = "jdbc:sqlite:log/"+ this.fileName;
         //Create Database
         try {
             this.conn = DriverManager.getConnection(url);
@@ -47,6 +47,9 @@ public class DataMonster {
             System.out.println(e.getMessage());
         }
     }
+    // Make a table where called csvValues
+    // most values are Strings with the exception
+    // of E and J
     public void makeTable(){
         String table = "CREATE TABLE IF NOT EXISTS csvValues ("+
                     "id Integer PRIMARY KEY, "+
@@ -130,12 +133,5 @@ public class DataMonster {
         pstmt.setString(9, record.get("I").trim());
         pstmt.setString(10, record.get("J").trim());
 
-    }
-    //Getters
-    public int getSuccess(){
-        return this.success;
-    }
-    public int getFailed(){
-        return this.fail;
     }
 }

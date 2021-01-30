@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class FileWriterMonster {
     //Mainly a static class -> No reason to create an instance of this class
     public static void writeErrorLog(ArrayList<CSVRecord> errors, String file){
-        String outputFileName = file + ".csv";
+        String outputFileName = System.getProperty("user.dir")+"/log/" + file + "-bad.csv";
         String[] headers = new String[] {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
         try {
             CSVPrinter csvPrinter = new CSVPrinter(new FileWriter(outputFileName), CSVFormat.DEFAULT.withHeader(headers));
@@ -28,7 +28,6 @@ public class FileWriterMonster {
                         record.get("D"), record.get("E"), record.get("F"), record.get("G"),
                         record.get("H"), record.get("I"), record.get("J")
                 );
-                csvPrinter.println();
             }
             csvPrinter.close();
         } catch (IOException e) {
@@ -40,7 +39,7 @@ public class FileWriterMonster {
     public static void writeStats(int fail, int success, String file){
         try {
             int sum = success + fail;
-            FileWriter myWriter = new FileWriter(file + ".log");
+            FileWriter myWriter = new FileWriter(System.getProperty("user.dir")+"/log/" +file + ".log");
             myWriter.write("Number of Records: " + sum + "\n");
             myWriter.write("Number of Success Records: " + success  + "\n");
             myWriter.write("Number of Failed Records: " + fail + "\n");
