@@ -24,9 +24,9 @@ public class DataMonster {
     private Connection conn;
     private String fileName;
     private String csvFile;
-    ArrayList<CSVRecord> errorRecords;
-    int success;
-    int fail;
+    private ArrayList<CSVRecord> errorRecords;
+    private int success;
+    private int fail;
 
     public DataMonster(String filename, String csvFile){
         this.fileName = filename;

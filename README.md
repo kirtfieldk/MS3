@@ -45,7 +45,11 @@ the stats and error entries into files.
 This application places data into a SQLite database but offers no querying method. To see the 
 database, use another application to the values-`DB Browser for SQLite` or use `SELECT * FROM
 csvValues`. 
-
+### Assumptions
+- The `.csv` file's header will always be `A,B,C,D,E,F,G,H,I,J`
+- the file for argument one will always end in `.db`
+- The file can be accessed by full path or if the file is in the current directory
+ 
 ### No Dockerfile
 No use of Dockerfile because it would be to cumbersome of a task. This would force that the 
 `.csv` file must always be in the directory of `MS3` or copied into the container with
