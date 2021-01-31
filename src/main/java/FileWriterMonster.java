@@ -17,35 +17,26 @@ import java.util.ArrayList;
 
 public class FileWriterMonster {
     //Mainly a static class -> No reason to create an instance of this class
-    public static void writeErrorLog(ArrayList<CSVRecord> errors, String file){
+    public static void writeErrorLog(ArrayList<CSVRecord> errors, String file) throws IOException{
         String outputFileName = System.getProperty("user.dir")+"/log/" + file + "-bad.csv";
         String[] headers = new String[] {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
-        try {
-            CSVPrinter csvPrinter = new CSVPrinter(new FileWriter(outputFileName), CSVFormat.DEFAULT.withHeader(headers));
-            for(CSVRecord record: errors){
-                //For each record in the errors array will be written into this csv file
-                csvPrinter.printRecord(record.get("A"), record.get("B"),record.get("C"),
-                        record.get("D"), record.get("E"), record.get("F"), record.get("G"),
-                        record.get("H"), record.get("I"), record.get("J")
-                );
-            }
-            csvPrinter.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+        CSVPrinter csvPrinter = new CSVPrinter(new FileWriter(outputFileName), CSVFormat.DEFAULT.withHeader(headers));
+        for(CSVRecord record: errors){
+            //For each record in the errors array will be written into this csv file
+            csvPrinter.printRecord(record.get("A"), record.get("B"),record.get("C"),
+                    record.get("D"), record.get("E"), record.get("F"), record.get("G"),
+                    record.get("H"), record.get("I"), record.get("J")
+            );
         }
-
+        csvPrinter.close();
     }
     //Standard method to write three lines > Records, failed, success
-    public static void writeStats(int fail, int success, String file){
-        try {
+    public static void writeStats(int fail, int success, String file) throws  IOException{
             int sum = success + fail;
             FileWriter myWriter = new FileWriter(System.getProperty("user.dir")+"/log/" +file + ".log");
             myWriter.write("Number of Records: " + sum + "\n");
             myWriter.write("Number of Success Records: " + success  + "\n");
             myWriter.write("Number of Failed Records: " + fail + "\n");
             myWriter.close();
-        }catch(IOException e){
-            System.out.println(e.getMessage());
-        }
         }
 }

@@ -102,12 +102,12 @@ public class DataMonster {
                     i++;
                 }
             }
+            //At the vary end of this function -> Create records
+            FileWriterMonster.writeErrorLog(this.errorRecords, this.csvFile);
+            FileWriterMonster.writeStats(this.fail, this.success, this.csvFile);
         }catch(SQLException | IOException | IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
-        //At the vary end of this function -> Create records
-        FileWriterMonster.writeErrorLog(this.errorRecords, this.csvFile);
-        FileWriterMonster.writeStats(this.fail, this.success, this.csvFile);
     }
 
 
