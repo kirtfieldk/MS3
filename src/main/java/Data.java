@@ -11,14 +11,12 @@ public class Data {
         logDir.mkdir();
         try {
             Class.forName("org.sqlite.JDBC");
-            if (args.length == 2)
-                dataMonster = new DataMonster(args[0], args[1]);
+            if (args.length == 1)
+                dataMonster = new DataMonster(args[0]);
             else{
-                System.out.println("Enter File:");
-                String fileName = userInput.nextLine();
                 System.out.println("Enter CSV File:");
                 String csvFile = userInput.nextLine();
-                dataMonster = new DataMonster(fileName, csvFile);
+                dataMonster = new DataMonster(csvFile);
             }
             //After we set the value to dataMonster we make the table and insert the values
             dataMonster.makeTable();

@@ -22,14 +22,12 @@ public class DataMonster {
         And a count of how many were inserted correctly and how many were not
      */
     private Connection conn;
-    private String fileName;
     private String csvFile;
     private ArrayList<CSVRecord> errorRecords;
     private int success;
     private int fail;
 
-    public DataMonster(String filename, String csvFile){
-        this.fileName = filename;
+    public DataMonster( String csvFile){
         this.csvFile = csvFile;
         this.success = 0;
         this.fail = 0;
@@ -38,7 +36,7 @@ public class DataMonster {
 
     }
     public void getConnectionAndMakeDb(){
-        String url = "jdbc:sqlite:log/"+ this.fileName;
+        String url = "jdbc:sqlite:log/"+ this.csvFile;
         //Create Database
         try {
             this.conn = DriverManager.getConnection(url);
@@ -108,8 +106,8 @@ public class DataMonster {
             System.out.println(e.getMessage());
         }
         //At the vary end of this function -> Create records
-        FileWriterMonster.writeErrorLog(this.errorRecords, this.fileName);
-        FileWriterMonster.writeStats(this.fail, this.success, this.fileName);
+        FileWriterMonster.writeErrorLog(this.errorRecords, this.csvFile);
+        FileWriterMonster.writeStats(this.fail, this.success, this.csvFile);
     }
 
 
