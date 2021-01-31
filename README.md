@@ -17,7 +17,7 @@ mvn -f pom.xml clean package install
 This places the `sqLite-MS3.jar` in the `./target` directory, and places the 
 dependency jars in the `./target/libs` folder. To Execute run:
 ```
-java -cp ./target/sqLite-MS3.jar Data <.bd_file> <.csv_file_path>
+java -cp ./target/sqLite-MS3.jar Data <.csv_file_path>
 ```
 ## Overview
 
@@ -47,7 +47,7 @@ database, use another application to the values-`DB Browser for SQLite` or use `
 csvValues`. 
 ### Assumptions
 - The `.csv` file's header will always be `A,B,C,D,E,F,G,H,I,J`
-- the file for argument one will always end in `.db`
+- the file for argument one will always end in `.csv`
 - The file can be accessed by full path or if the file is in the current directory
  
 ### No Dockerfile
