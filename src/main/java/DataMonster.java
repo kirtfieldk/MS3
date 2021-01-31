@@ -36,7 +36,7 @@ public class DataMonster {
 
     }
     public void getConnectionAndMakeDb(){
-        String url = "jdbc:sqlite:log/"+ this.csvFile;
+        String url = "jdbc:sqlite:log/"+ this.csvFile + ".db";
         //Create Database
         try {
             this.conn = DriverManager.getConnection(url);
