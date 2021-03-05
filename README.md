@@ -1,4 +1,4 @@
-# MS3
+# CSV Reader -> SQLite
 
 This repository reads a `.csv` file and inputs the data into 
 a `sqlite` database. If any value is empty in the `.csv`,
